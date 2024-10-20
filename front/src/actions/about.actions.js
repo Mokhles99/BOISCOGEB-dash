@@ -1,19 +1,16 @@
 import { aboutConstants } from './constantes';
-
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 export const createAbout = (aboutData) => (dispatch) => {
   dispatch({ type: aboutConstants.CREATE_ABOUT_REQUEST });
-
   // Préparez le FormData
   const formData = new FormData();
-
-  // Ajoutez les fichiers au FormData
+   // Ajoutez les fichiers au FormData
   if (aboutData.files && aboutData.files.length) {
     aboutData.files.forEach(file => {
       formData.append('files', file);
     });
   }
-
-  fetch('http://localhost:8089/about/create', {
+  fetch(`${BASE_URL}/about/create`, {
     method: 'POST',
     body: formData, // Pas besoin de définir 'Content-Type' pour FormData, le navigateur le fera
   })
@@ -32,7 +29,7 @@ export const createAbout = (aboutData) => (dispatch) => {
 // Récupérer tous les produits
 export const getAllAbouts = () => (dispatch) => {
   dispatch({ type: aboutConstants.GET_ALL_ABOUTS_REQUEST });
-  fetch('http://localhost:8089/about/abouts')
+  fetch(`${BASE_URL}/about/abouts`)
     .then((response) => response.json())
     .then((data) => dispatch({
       type: aboutConstants.GET_ALL_ABOUTS_SUCCESS,
@@ -48,7 +45,7 @@ export const getAllAbouts = () => (dispatch) => {
 export const getAboutById = (id) => async (dispatch) => {
     dispatch({ type: aboutConstants.GET_ABOUT_REQUEST });
     try {
-      const response = await fetch(`http://localhost:8089/about/abouts/${id}`);
+      const response = await fetch(`${BASE_URL}/about/abouts/${id}`);
       const data = await response.json();
       dispatch({
         type: aboutConstants.GET_ABOUT_SUCCESS,
@@ -78,7 +75,7 @@ export const updateAbout = (id, aboutData) => (dispatch) => {
 
   console.log("FormData to be sent:", Object.fromEntries(formData)); // Display FormData entries
 
-  fetch(`http://localhost:8089/about/update/${id}`, {
+  fetch(`${BASE_URL}/about/update/${id}`, {
       method: 'PUT',
       body: formData,
   })
@@ -116,7 +113,7 @@ export const updateAbout = (id, aboutData) => (dispatch) => {
 export const deleteAbout = (id) => (dispatch) => {
     dispatch({ type: aboutConstants.DELETE_ABOUT_REQUEST });
 
-    fetch(`http://localhost:8089/about/delete/${id}`, {
+    fetch(`${BASE_URL}/about/delete/${id}`, {
         method: 'DELETE',
     })
     .then(response => {
@@ -146,7 +143,7 @@ export const deleteAbout = (id) => (dispatch) => {
 
 export const countAbouts = () => (dispatch) => {
   dispatch({ type: aboutConstants.COUNT_ABOUTS_REQUEST });
-  fetch('http://localhost:8089/about/count')
+  fetch(`${BASE_URL}/about/count`)
     .then((response) => response.json())
     .then((data) => dispatch({
       type: aboutConstants.COUNT_ABOUTS_SUCCESS,

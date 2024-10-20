@@ -1,7 +1,7 @@
 // 
 
 import { productConstants } from './constantes';
-
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 export const createProduct = (productData) => (dispatch) => {
   dispatch({ type: productConstants.CREATE_PRODUCT_REQUEST });
 
@@ -15,7 +15,7 @@ export const createProduct = (productData) => (dispatch) => {
   formData.append('categorie', productData.categorie);
   formData.append('famille', productData.famille);
 
-  fetch('http://localhost:8089/product/create', {
+  fetch(`${BASE_URL}/product/create`, {
     method: 'POST',
     body: formData, // Pas besoin de définir 'Content-Type' pour FormData, le navigateur le fera
   })
@@ -33,7 +33,7 @@ export const createProduct = (productData) => (dispatch) => {
 // Récupérer tous les produits
 export const getAllProducts = () => (dispatch) => {
   dispatch({ type: productConstants.GET_ALL_PRODUCTS_REQUEST });
-  fetch('http://localhost:8089/product/products')
+  fetch(`${BASE_URL}/product/products`)
     .then((response) => response.json())
     .then((data) => dispatch({
       type: productConstants.GET_ALL_PRODUCTS_SUCCESS,
@@ -49,7 +49,7 @@ export const getAllProducts = () => (dispatch) => {
 export const getProductById = (id) => async (dispatch) => {
   dispatch({ type: productConstants.GET_PRODUCT_REQUEST });
   try {
-    const response = await fetch(`http://localhost:8089/product/products/${id}`);
+    const response = await fetch(`${BASE_URL}/product/products/${id}`);
     const data = await response.json();
     dispatch({
       type: productConstants.GET_PRODUCT_SUCCESS,
@@ -74,7 +74,7 @@ export const updateProduct = (id, productData) => (dispatch) => {
   formData.append('categorie', productData.categorie);
   formData.append('famille', productData.famille);
 
-  fetch(`http://localhost:8089/product/update/${id}`, {
+  fetch(`${BASE_URL}/product/update/${id}`, {
     method: 'PUT',
     body: formData,
   })
@@ -104,7 +104,7 @@ export const updateProduct = (id, productData) => (dispatch) => {
 export const deleteProduct = (id) => (dispatch) => {
   dispatch({ type: productConstants.DELETE_PRODUCT_REQUEST });
 
-  fetch(`http://localhost:8089/product/delete/${id}`, {
+  fetch(`${BASE_URL}/product/delete/${id}`, {
     method: 'DELETE',
   })
   .then(response => {
@@ -131,7 +131,7 @@ export const deleteProduct = (id) => (dispatch) => {
 
 export const countProducts = () => (dispatch) => {
   dispatch({ type: productConstants.COUNT_PRODUCTS_REQUEST });
-  fetch('http://localhost:8089/product/count')
+  fetch(`${BASE_URL}/product/count`)
     .then((response) => response.json())
     .then((data) => dispatch({
       type: productConstants.COUNT_PRODUCTS_SUCCESS,

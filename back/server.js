@@ -5,11 +5,6 @@ const dbConfig = require("./app/config/db.config");
 const cloudinary = require('cloudinary').v2;
 require('dotenv').config();
 
-// console.log('Cloudinary Configurations:');
-// console.log('CLOUDINARY_CLOUD_NAME:', process.env.CLOUDINARY_CLOUD_NAME);
-// console.log('CLOUDINARY_API_KEY:', process.env.CLOUDINARY_API_KEY);
-// console.log('CLOUDINARY_API_SECRET:', process.env.CLOUDINARY_API_SECRET);
-
 const mongoose = require('mongoose');
 const app = express();
 
@@ -22,10 +17,10 @@ var corsOptions = {
 };
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-}); 
+  cloud_name: 'dlp3bn4yr',
+  api_key: '241549437291335',
+  api_secret: 'Cn9oM8rXApFHPvsfOh7HNa5BL-0'
+});
    
 const productRoutes=require ('./app/routes/product.routes')
 const aboutRoutes=require ('./app/routes/about.routes')
@@ -41,8 +36,8 @@ const carttwoRoutes = require ('./app/routes/carttwo.routes')
 app.use('/download', downloadRoutes);
 app.use('/upload', uploadRoute); 
 mongoose.set('strictQuery', false);
-const MONGODB_URI = process.env.MONGODB_URI;
-
+// const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI='mongodb+srv://Mokles:123456789Mokles@cluster0.0qupb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 
 // parse requests of content-type - application/json
 

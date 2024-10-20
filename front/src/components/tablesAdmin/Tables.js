@@ -21,6 +21,7 @@ import 'chart.js/auto';
 import CarouselTables from './CarouselTables';
 import CatalogueTables from './CatalogueTables';
 import AboutTables from './AboutTables';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 const style = {
     position: 'absolute',
     top: '50%',
@@ -120,7 +121,7 @@ const Tables = () => {
       
 
         try {
-            const response = await fetch('http://localhost:8089/product/create', {
+            const response = await fetch(`${BASE_URL}/product/create`, {
                 method: 'POST',
                 body: formData
             });
