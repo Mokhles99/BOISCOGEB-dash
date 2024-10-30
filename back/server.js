@@ -13,7 +13,7 @@ app.use(cors(corsOptions));
 const bodyParser = require('body-parser')
 
 var corsOptions = {
-  origin: ['http://localhost:8081','http://localhost:8082','http://localhost:8080','http://localhost:3000', 'http://localhost:3001','http://127.0.0.1:5173','http://127.0.0.1:5174']
+  origin:"*"
 };
 
 cloudinary.config({
